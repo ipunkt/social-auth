@@ -1,0 +1,28 @@
+{
+    "name": "ipunkt/social-auth",
+    "description": "Wrapper which allows login through oauth-esque providers by only setting their configuration values",
+    "keywords": ["laravel", "php", "oauth"],
+    "homepage": "https://github.com/ipunkt/social-auth",
+    "authors": [
+        {
+            "name": "Sven Speckmaier",
+            "email": "sps@ipunkt.biz"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.2.*",
+        "illuminate/config": "4.2.*",
+			"hybridauth/hybridauth": "*@dev"
+    },
+    "autoload": {
+        "classmap": [
+            "src/controllers/",
+            "src/migrations/"
+        ],
+        "psr-0": {
+            "Ipunkt\\SocialAuth\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
