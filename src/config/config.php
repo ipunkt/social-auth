@@ -21,11 +21,11 @@ return [
         'providers' => [
             'Facebook' => [
                 'enabled' => true,
-                'keys' => ['id' => '314397715379515', 'secret' => 'fefc06c9fb52badab6071558f4162bcb'],
+                'keys' => ['id' => 'Facebookid', 'secret' => 'supersecretkey'],
             ],
             'Twitter' => [
                 'enabled' => false,
-                'keys' => ['key' => 'eTc3liEjj4oZPphPWXzQUL8xp', 'secret' => '5mxqcPAScWWjQ6B5BZcTBKhPq25owqbW1Iddql4bYwc7qlUCvj'],
+                'keys' => ['key' => 'Twitterid', 'secret' => 'evenmoresecretkey'],
             ],
         ],
     ],

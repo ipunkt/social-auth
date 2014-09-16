@@ -24,7 +24,8 @@ To configure social-auth 3 steps are necessary. The order of these steps does no
 ### Add the Social provider
 Add 
 
-    'Ipunkt\Permissions\SocialAuthServiceProvider'
+    'Ipunkt\SocialAuth\SocialAuthServiceProvider'
+
 
 to your app.php
 
@@ -41,7 +42,7 @@ then set your provider credentials in
 ### Migrate
 Migrate the necessary database tables.
 
-    php artisan migrate
+    php artisan migrate --package="ipunkt/social-auth"
     
 ## Use
 
