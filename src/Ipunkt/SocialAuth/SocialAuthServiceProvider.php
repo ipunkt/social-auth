@@ -36,10 +36,9 @@ class SocialAuthServiceProvider extends ServiceProvider {
                 'Ipunkt\SocialAuth\Repositories\EloquentUserRepository');
         App::bind('Ipunkt\SocialAuth\Repositories\SocialLoginRepository',
             'Ipunkt\SocialAuth\Repositories\EloquentSocialLoginRepository');
+        App::bind('Ipunkt\SocialAuth\SocialAuthInterface',
+            'Ipunkt\SocialAuth\SocialAuthObject');
         require_once __DIR__ . "/../../routes.php";
-
-        $this->app->view->composer('*', 'Ipunkt\SocialAuth\Composers\LinkComposer');
-        $this->app->view->composer('*', 'Ipunkt\SocialAuth\Composers\RegisterInfoComposer');
 
         Event::listen('auth.logout', 'Ipunkt\SocialAuth\SocialLoginController@logout');
 	}

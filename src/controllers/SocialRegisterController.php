@@ -141,8 +141,10 @@ class SocialRegisterController extends \BaseController {
             $register_info->setProvider($provider_name);
             $register_info->setIdentifier($identifier);
             $register_info->setInfo($profile);
-
-            $response = Redirect::route($route)->with('registerInfo', $register_info);
+            
+            SocialAuth::setRegistration($register_info);
+            
+            $response = Redirect::route($route);
         } else {
             $response = Redirect::route($route)->withErrors(['message' => trans('social-auth::user.account already registered', ['accountname' => $profile->displayName]),
                 ['accountname' => $profile->displayName]]);

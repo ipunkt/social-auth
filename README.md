@@ -1,10 +1,11 @@
 ipunkt/social-auth
 ============
 
-Social-Auth wraps around an oauth library, currently hybrid_auth, to provide oauth by pulling this package in and
-setting your provider credentials.
+Social-Auth is a Laravel package which wraps around a oauth library and laravel with the goal to let you simply
+set the provider credentials and be done.
 
-I will probably switch out hybrid_auth in favor of the new socialite laravel package in the future
+It currently uses hybrid_auth in the background.
+With the coming of the new SocialLite package for laravel i will probably switch out hybrid_auth for it.
 
 
 # Install
@@ -19,7 +20,9 @@ Add the following lines to your composer.json:
 
 ## Configuration
 
-To configure social-auth 3 steps are necessary. The order of these steps does not matter.
+To configure 3 steps are necessary.  
+If you wish for user deletes to trigger deletion of their mappings to provider accounts make sure to set the
+'user table' variable in the config before migrating
 
 ### Add the Social provider
 Add 
@@ -64,10 +67,11 @@ Example: `{{ link_to_route('social.attach', 'Facebook') }}`
 
 What happens:
 
-- If the user is not already logged into the provider, he is asked to log in
-- If the provider account is already mapped to a local account: flash error message to Session: $errors['message']
-- If the provider account is not mapped yet it will now be mapped to the currently logged in account. flash success message to Session: 'message'
-- Redirect back to the url the user came from.
+Action                                  |True                               |False
+----------------------------------------|-----------------------------------|----------------
+Already logged in?                      |                                   | Ask user to log in to the provider
+Provider account already mapped to user | set $errors['message'] in Session | Create mapping between the currently logged in user and the provider account
+Redirect back | |
 
 #### Logging in through a service provider account
 How: provide the user with a link to the social.login route, with the provider name as Parameter  
@@ -75,32 +79,29 @@ Example: `{{ link_to_route('social.login', 'Facebook') }}`
 
 What happens:
 
-- If the user is already logged in to a local account he is redirected back to the url he came from
-- If the user is not logged in to a local account and is not logged in to a service provider account he is asked to log
-into his service provider account
-- If the service provider account is mapped to a local account: The user is logged in to the local account and Redirected
-to `intended`, flash success message to Session: $message
-- If the service provider account is not mapped to a local account: flash error message to Session: $errors['message'],
-Redirect back to the url the user came from.
+Action                                  |True                               |False
+----------------------------------------|-----------------------------------|----------------
+Logged in to local account?             |                                   | Redirect back with errors['message'] set
+Logged in to provider account?          |                                   | User is asked to log into the provider
+Provider account already mapped to user | Log in local account              | set $errors['message'] in Session
+Redirect back | |
 
 #### Registering a new local account using a provider account
 This is done through the 'social.register' route _from within the register process_.  
 It expects the name of the Provider as set in the config as its parameter.  
 Example: `{{ link_to_route('social.register', 'Facebook') }}`
 
-What happens:
-- If the user is already logged in to a local account he is redirected back to the url he came from
-- If the user is not logged in to a local account and is not logged in to a service provider account he is asked to log
-into his service provider account
-- If the service provider account is mapped to a local account: Redirect back, flash error message to Session: $errors['message']
-- If the service provider account is not mapped to a local account: flash RegisterInfo object to Session: $registerInfo,
-Redirect back to the registering Process
+Action                                  |True                               |False
+----------------------------------------|-----------------------------------|----------------
+User logged in to local account?        | Redirect back                     |
+User logged in to provider account?     |                                   | User is asked to log into the provider
+Provider account mapped to local user?  | set $errors['message'] in Session | Set RegisterInfoInterface to be retrieved with SocialAuth::getRegisteration()
 
 The RegisterInfo Object provides information about the user and allows the creation of the mapping once the register
 process is done.  
 
 - $registerInfo->providesLogin() will return true if the mapping can be used to log in, thus it is not necessary to ask
-for a sperarate password.
+for a separate password.
 - $registerInfo->getInfo($fieldName) allows to access the profile of the service provider account. See 
 http://hybridauth.sourceforge.net/userguide/Profile_Data_User_Profile.html for what info can be obtained through which
 fieldName
@@ -112,15 +113,15 @@ This means however that you have to reflash in your registration controller or i
 storing the user.
 
 ### Links to all available providers
-Instead of providing each link individualy most of the time it makes more sense provide a list of links to all providers
-which have been enabled in the config. To do this, 3 variables are passed to your View: $socialauth_login_links,
-$socialauth_register_links and $socialauth_attach_links  
+To provide links to all enabled providers use the SocialAuth::get*Links() functions.
 
-All of them hold Containers of SocialLinkInterfaces
+- getLoginLinks()
+- getRegisterLinks()
+- getAttachLinks()
 
 Example use:  
 ```blade
-@foreach( $socialauth_login_links as $link)
+@foreach( SocialAuth::getLoginLinks() as $link)
     {{ $link->getLink($link->getName()) }}
 @endforeach
 ```
@@ -142,6 +143,3 @@ bind this repository to 'Ipunkt\SocialAuth\SocialLoginInterface' in the Laravel 
 Create a repository which implements the UserRepository interface
 
 bind this repository to 'Ipunkt\SocialAuth\Repositories\UserRepository' in the Laravel IoC
-
-## TODO
-Provide objects and Facades to make links
