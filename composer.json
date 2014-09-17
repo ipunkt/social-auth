@@ -3,6 +3,7 @@
     "description": "Wrapper which allows login through oauth-esque providers by only setting their configuration values",
     "keywords": ["laravel", "php", "oauth"],
     "homepage": "https://github.com/ipunkt/social-auth",
+    "license": "MIT",
     "authors": [
         {
             "name": "Sven Speckmaier",
