@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
  */
 class SocialAuth extends Facade {
     protected static function getFacadeAccessor() {
-        return 'SocialAuthInterface';
+        return 'Ipunkt\SocialAuth\SocialAuthInterface';
     }
 
 } 

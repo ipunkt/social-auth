@@ -3,6 +3,7 @@
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
 use Ipunkt\SocialAuth\Composers\SocialLink;
+use \Config;
 
 /**
  * Class SocialAuthObject
