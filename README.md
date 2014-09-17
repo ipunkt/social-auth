@@ -33,7 +33,7 @@ to your app.php
 
 Publish
 
-    php artisan config::publish ipunkt/social-auth
+    php artisan config:publish ipunkt/social-auth
 
 then set your provider credentials in
 
@@ -116,24 +116,15 @@ Instead of providing each link individualy most of the time it makes more sense 
 which have been enabled in the config. To do this, 3 variables are passed to your View: $socialauth_login_links,
 $socialauth_register_links and $socialauth_attach_links  
 
-The have the format
-`$socialauth_*_links = [
-    [
-        'name' => 'Facebook',
-        'url' => 'http://path.to/your/laravel/installation/social/*/Facebook',
-        'image' => '...' // This is only set if you provide image as extra field in the config
-    ]
-]`
+All of them hold Containers of SocialLinkInterfaces
 
 Example use:  
-`@foreach( $socialauth_login_links as $link)
-    @if (array_key_exists('image', $link))
-        <img src="{{ $link['image'] }}">
-    @else
-        <a href="{{ $link['url'] }}">{{ $link['name'] }}</a>
-    @endif
+```blade
+@foreach( $socialauth_login_links as $link)
+    {{ $link->getLink($link->getName()) }}
 @endforeach
-`
+```
+
 
 ## Advanced Use
 
