@@ -17,7 +17,7 @@ class SocialAuthServiceProvider extends ServiceProvider {
 	protected $defer = false;
 
     public function boot() {
-        $this->package('Ipunkt/social-auth', 'social-auth');
+        $this->package('ipunkt/social-auth', 'social-auth');
     }
 
 	/*
