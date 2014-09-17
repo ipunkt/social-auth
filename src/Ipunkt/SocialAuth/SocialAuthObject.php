@@ -39,6 +39,7 @@ class SocialAuthObject implements SocialAuthInterface {
      * @return RegisterInfoInterface|null
      */
     public function getRegisteration() {
+        Session::keep(self::REGISTER_INFO_SESSION);
         return Session::get(self::REGISTER_INFO_SESSION);
     }
 
