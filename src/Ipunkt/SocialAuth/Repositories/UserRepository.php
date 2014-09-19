@@ -19,7 +19,7 @@ interface UserRepository {
      * @param int $id
      * @return null|User
      */
-    public function find($id);
+    function find($id);
 
     /**
      * Attempt to find a UserInterface by given login credentials
@@ -28,13 +28,13 @@ interface UserRepository {
      * @param array $credentials
      * @return null|User
      */
-    public function findByAuth($provider, $identifier);
+    function findByAuth($provider, $identifier);
 
     /**
      * Attempt to save updates to the User
      *
      * @return boolean
      */
-    public function save(UserInterface $user);
+    function save(UserInterface $user);
 
 }

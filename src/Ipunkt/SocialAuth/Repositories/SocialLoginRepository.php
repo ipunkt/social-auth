@@ -10,7 +10,7 @@ interface SocialLoginRepository {
      * @param int $id
      * @return SocialLoginInterface|null
      */
-    public function find($id);
+    function find($id);
 
     /**
      * find SocialLogin by id or throw exception if not found
@@ -18,7 +18,7 @@ interface SocialLoginRepository {
      * @param int $id
      * @return SocialLoginInterface|null
      */
-    public function findOrFail($id);
+    function findOrFail($id);
 
     /**
      * return SocialLogin by the name of the provider and the identifier this provider has given for the user, or null
@@ -27,16 +27,16 @@ interface SocialLoginRepository {
      * @param string $provider
      * @param string $identifier|null
      */
-    public function findByAuth($provider, $identifier);
+    function findByAuth($provider, $identifier);
 
     /**
      * @return SocialLoginInterface
      */
-    public function create();
+    function create();
 
     /**
      *
      * @return boolean
      */
-    public function save(SocialLoginInterface $login);
+    function save(SocialLoginInterface $login);
 }

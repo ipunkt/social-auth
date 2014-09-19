@@ -18,11 +18,19 @@ class SocialLoginController extends \BaseController {
      */
     private $user_repository;
 
+	/**
+	 * @param UserRepository $user_repository
+	 * @param Hybrid_Auth $hybrid_auth
+	 */
     public function __construct(UserRepository $user_repository, Hybrid_Auth $hybrid_auth) {
         $this->hybrid_auth = $hybrid_auth;
         $this->user_repository = $user_repository;
     }
 
+	/**
+	 * @param $provider_name
+	 * @return Response
+	 */
     public function login($provider_name) {
         $response = null;
         try {
@@ -44,6 +52,9 @@ class SocialLoginController extends \BaseController {
         return $response;
     }
 
+	/**
+	 * Hybridauth endpoint
+	 */
     public function auth() {
         Hybrid_Endpoint::process();
         return;

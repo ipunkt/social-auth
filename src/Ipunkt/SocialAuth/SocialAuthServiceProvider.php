@@ -7,6 +7,10 @@ use Event;
 use Hybrid_Auth;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class SocialAuthServiceProvider
+ * @package Ipunkt\SocialAuth
+ */
 class SocialAuthServiceProvider extends ServiceProvider {
 
 	/**
@@ -16,27 +20,30 @@ class SocialAuthServiceProvider extends ServiceProvider {
 	 */
 	protected $defer = false;
 
+	/**
+	 * 
+	 */
     public function boot() {
         $this->package('ipunkt/social-auth', 'social-auth');
     }
 
-	/*
+	/**
 	 * Register the service provider.
 
 	 * @return void
 	 */
 	public function register()
 	{
-        App::bind('Hybrid_Auth', function() {
+        $this->app->bind('Hybrid_Auth', function() {
                 $config = \Config::get('social-auth::hybridauth');
                 return new Hybrid_Auth( $config );
             }
         );
-        App::bind('Ipunkt\SocialAuth\Repositories\UserRepository',
+        $this->app->bind('Ipunkt\SocialAuth\Repositories\UserRepository',
                 'Ipunkt\SocialAuth\Repositories\EloquentUserRepository');
-        App::bind('Ipunkt\SocialAuth\Repositories\SocialLoginRepository',
+        $this->app->bind('Ipunkt\SocialAuth\Repositories\SocialLoginRepository',
             'Ipunkt\SocialAuth\Repositories\EloquentSocialLoginRepository');
-        App::bind('Ipunkt\SocialAuth\SocialAuthInterface',
+        $this->app->bind('Ipunkt\SocialAuth\SocialAuthInterface',
             'Ipunkt\SocialAuth\SocialAuthObject');
         require_once __DIR__ . "/../../routes.php";
 

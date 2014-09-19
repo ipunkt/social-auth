@@ -35,21 +35,21 @@ class ProfileRegisterInfo implements RegisterInfoInterface {
     /**
      * @param $provider
      */
-    function setProvider($provider) {
+    public function setProvider($provider) {
         $this->provider = $provider;
     }
 
     /**
      * @param $identifier
      */
-    function setIdentifier($identifier) {
+    public function setIdentifier($identifier) {
         $this->identifier = $identifier;
     }
 
     /**
      * @param $profile
      */
-    function setInfo($profile) {
+    public function setInfo($profile) {
         $this->profile = $profile;
     }
 
@@ -59,7 +59,7 @@ class ProfileRegisterInfo implements RegisterInfoInterface {
      * @param string $info_name
      * @return mixed
      */
-    function getInfo($info_name) {
+    public function getInfo($info_name) {
         $value = null;
         if($info_name == 'provider')
             $value = $this->provider;
@@ -73,7 +73,7 @@ class ProfileRegisterInfo implements RegisterInfoInterface {
      *
      * Attaches the social-auth user to the newly created user
      */
-    function success(UserInterface $user) {
+    public function success(UserInterface $user) {
         $repository = App::make('Ipunkt\SocialAuth\Repositories\SocialLoginRepository');
         /**
          * @var SocialLoginRepository $repository
@@ -86,20 +86,12 @@ class ProfileRegisterInfo implements RegisterInfoInterface {
     }
 
     /**
-     * Notify the provider of the RegisterInfo that registering the user has failed.
-     *
-     * Logs out the user
-     */
-    function fail() {
-    }
-
-    /**
      * This function returns true if calling success with the created user will create a way to log in to this user
      * This is mainly ment to hide the password field for socialauth logins.
      *
      * @return boolean
      */
-    function providesLogin() {
+    public function providesLogin() {
         return true;
     }
 

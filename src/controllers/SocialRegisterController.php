@@ -22,10 +22,12 @@ class SocialRegisterController extends \BaseController {
      * @var SocialLoginRepository
      */
     private $login_repository;
+	
     /**
      * @var Repositories\UserRepository
      */
     private $user_repository;
+	
     /**
      * @var \Hybrid_Auth
      */

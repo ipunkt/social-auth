@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
-use Ipunkt\SocialAuth\Composers\SocialLink;
+use Ipunkt\SocialAuth\SocialLink\SocialLink;
 use \Config;
 
 /**
@@ -20,7 +20,7 @@ class SocialAuthObject implements SocialAuthInterface {
      *
      * @param RegisterInfoInterface $info
      */
-    function setRegistration(RegisterInfoInterface $info) {
+    public function setRegistration(RegisterInfoInterface $info) {
         Session::set(self::REGISTER_INFO_SESSION, $info);
     }
     

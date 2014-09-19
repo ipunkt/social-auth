@@ -10,16 +10,23 @@ namespace Ipunkt\SocialAuth\Repositories;
 
 
 use Illuminate\Auth\UserInterface;
-use Ipunkt\Multiauth\Models\LoginMethod;
-use Ipunkt\Multiauth\User;
 use Ipunkt\SocialAuth\SocialLogin;
 
+/**
+ * Class EloquentUserRepository
+ * @package Ipunkt\SocialAuth\Repositories
+ * 
+ * Eloquent implementation of the UserRepository interface
+ */
 class EloquentUserRepository implements UserRepository {
     /**
      * @var SocialLoginRepository
      */
     private $repository;
 
+	/**
+	 * @param SocialLoginRepository $repository
+	 */
     public function __construct(SocialLoginRepository $repository) {
 
         $this->repository = $repository;
