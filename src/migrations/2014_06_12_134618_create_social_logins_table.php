@@ -19,13 +19,13 @@ class CreateSocialLoginsTable extends Migration {
             $table->text('provider');
             $table->text('identifier');
 
-            if(Config::has('social-auth::user table')) {
-                $user_table = Config::get('social-auth::user table');
+            if(Config::has('social-auth::user_table')) {
+                $user_table = Config::get('social-auth::user_table');
                 if($user_table === null)
-                    $user_table = Config::get('auth::user table.table name');
+                    $user_table = Config::get('auth::user_table.table name');
                 $id = 'id';
-                if(Config::has('social-auth::user table id'))
-                    $id = Config::get('social-auth::user table id');
+                if(Config::has('social-auth::user_table id'))
+                    $id = Config::get('social-auth::user_table id');
                 $table->foreign('user_id')->references($id)->on($user_table)->onDelete('cascade');
             }
 		});

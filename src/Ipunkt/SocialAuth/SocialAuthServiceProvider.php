@@ -34,18 +34,9 @@ class SocialAuthServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-        $this->app->bind('Hybrid_Auth', function() {
-                $config = \Config::get('social-auth::hybridauth');
-                return new Hybrid_Auth( $config );
-            }
-        );
-        $this->app->bind('Ipunkt\SocialAuth\Repositories\UserRepository',
-                'Ipunkt\SocialAuth\Repositories\EloquentUserRepository');
-        $this->app->bind('Ipunkt\SocialAuth\Repositories\SocialLoginRepository',
-            'Ipunkt\SocialAuth\Repositories\EloquentSocialLoginRepository');
-        $this->app->bind('Ipunkt\SocialAuth\SocialAuthInterface',
-            'Ipunkt\SocialAuth\SocialAuthObject');
-        require_once __DIR__ . "/../../routes.php";
+		$this->setRoutes();
+		$this->setHybridauth();
+		$this->setBinds();
 
         Event::listen('auth.logout', 'Ipunkt\SocialAuth\SocialLoginController@logout');
 	}
@@ -59,6 +50,33 @@ class SocialAuthServiceProvider extends ServiceProvider {
 	public function provides()
 	{
 		return array();
+	}
+
+	protected function setRoutes() {
+		require_once __DIR__ . "/../../routes.php";
+	}
+
+	protected function setBinds() {
+		$this->app->bind('Ipunkt\SocialAuth\Repositories\UserRepository',
+			'Ipunkt\SocialAuth\Repositories\EloquentUserRepository');
+		$this->app->bind('Ipunkt\SocialAuth\Repositories\SocialLoginRepository',
+			'Ipunkt\SocialAuth\Repositories\EloquentSocialLoginRepository');
+		$this->app->bind('Ipunkt\SocialAuth\SocialAuthInterface',
+			'Ipunkt\SocialAuth\SocialAuthObject');
+	}
+
+	/**
+	 * @precondition Routes set up for this package.
+	 */
+	protected function setHybridauth() {
+		$this->app->bind('Hybrid_Auth', function () {
+				$config = [
+					'base_url' => route('social.auth'),
+					'providers' => \Config::get('social-auth::providers')
+                ];
+                return new Hybrid_Auth($config);
+            }
+		);
 	}
 
 }
