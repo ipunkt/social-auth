@@ -91,7 +91,7 @@ class SocialAuthObject implements SocialAuthInterface {
     protected function makeLinks($route) {
         $links = [];
 
-        $full_config = Config::get('social-auth::provider');
+        $full_config = Config::get('social-auth::providers');
         $providers = $full_config['providers'];
         foreach($providers  as $provider_name => $values) {
             if(array_key_exists('enabled', $values) && $values['enabled']) {
