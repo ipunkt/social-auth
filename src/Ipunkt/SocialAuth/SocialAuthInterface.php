@@ -4,6 +4,7 @@
 namespace Ipunkt\SocialAuth;
 use Illuminate\Support\Collection;
 use Ipunkt\SocialAuth\Composers\SocialLink;
+use ProviderInterface;
 
 
 /**
@@ -55,4 +56,18 @@ interface SocialAuthInterface {
      * @return SocialLink[]|Collection
      */
     function getLoginLinks();
+
+	/**
+	 * Returns all enabled provider from the config
+	 * 
+	 * @return ProviderInterface[]
+	 */
+	function getProviders();
+
+	/**
+	 * Returns only currently connected providers
+	 * 
+	 * @return mixed
+	 */
+	function getConnectedProviders();
 } 

@@ -1,9 +1,12 @@
 <?php namespace Ipunkt\SocialAuth;
 
+use Hybrid_Auth;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
+use Ipunkt\SocialAuth\Provider\HybridAuthProvider;
 use Ipunkt\SocialAuth\SocialLink\SocialLink;
 use \Config;
+use ProviderInterface;
 
 /**
  * Class SocialAuthObject
@@ -13,6 +16,15 @@ use \Config;
  */
 class SocialAuthObject implements SocialAuthInterface {
     const REGISTER_INFO_SESSION = 'registerInfo';
+	
+	/**
+	 * @var Hybrid_Auth
+	 */
+	private $hybridAuth;
+
+	public function __construct(Hybrid_Auth $hybridAuth) {
+		$this->hybridAuth = $hybridAuth;
+	}
 
     /**
      * Sets the RegisterInfoInterface to be received by getRegisteration
@@ -97,4 +109,46 @@ class SocialAuthObject implements SocialAuthInterface {
 
         return $links;
     }
+
+	/**
+	 * Returns all enabled provider from the config
+	 *
+	 * @return ProviderInterface[]
+	 */
+	public function getProviders() {
+		$hybridAuthProviders = $this->hybridAuth->getProviders();
+
+		$providers = $this->makeProviders($hybridAuthProviders);
+
+		return $providers;
+	}
+
+	/**
+	 * Returns only currently connected providers
+	 *
+	 * @return mixed
+	 */
+	public function getConnectedProviders() {
+		$hybridAuthProviders = $this->hybridAuth->getConnectedProviders();
+
+		$providers = $this->makeProviders($hybridAuthProviders);
+
+		return $providers;
+	}
+
+	/**
+	 * @param $hybridAuthProviders
+	 * @param $providers
+	 * @return array
+	 */
+	protected function makeProviders($hybridAuthProviders) {
+		$providers = [];
+		
+		foreach ( $hybridAuthProviders as $hybridAuthProvider )
+			$providers[] = new HybridAuthProvider($hybridAuthProvider);
+		
+		return $providers;
+	}
+
+
 } 
