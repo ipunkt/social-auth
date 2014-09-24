@@ -37,5 +37,128 @@ return [
 		    'enabled' => false,
 		    'keys' => ['key' => 'Twitterid', 'secret' => 'evenmoresecretkey'],
 	    ],
+	    'Github' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'Google' => [
+		    "enabled" => false,
+		    "keys" => [ "id" => "PUT_YOURS_HERE", "secret" => "PUT_YOURS_HERE" ],
+		    "scope" => "https://www.googleapis.com/auth/userinfo.profile ". // optional
+						"https://www.googleapis.com/auth/userinfo.email" , // optional
+		    "access_type" => "offline", // optional
+		    "approval_prompt" => "force", // optional
+		    //"hd" => "domain.com" // optional
+	    ],
+	    'Yahoo' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    // Windows Live
+	    'Live' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    'LinkedIn' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    'Foursquare' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'LastFM' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'Vimeo' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    'Viadeo' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    'Identica' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    'Tumblr' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    'Goodreads' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    'QQ' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    'Sina' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    'Murmur' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    'Pixnet' => [
+		    'enabled' => false,
+		    'keys' => ['key' => '', 'secret' => ''],
+	    ],
+	    'Plurk' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'Skyrock' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'Geni' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'FamilySearch' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'MyHeritage' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    // 500px
+	    'px500' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'Vkontakte' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'Mail.ru' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'Yandex' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'Odnoklassniki' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'Instagram' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'TwitchTV' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
+	    'Steam' => [
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
+	    ],
     ],
 ];
