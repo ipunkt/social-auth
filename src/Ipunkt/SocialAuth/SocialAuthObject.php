@@ -144,7 +144,7 @@ class SocialAuthObject implements SocialAuthInterface {
 		$providers = [];
 		
 		foreach ( $hybridAuthProviders as $hybridAuthProvider )
-			$providers[] = new HybridAuthProvider($hybridAuthProvider);
+			$providers[] = new HybridAuthProvider($this->hybridAuth->getAdapter($hybridAuthProvider));
 		
 		return $providers;
 	}

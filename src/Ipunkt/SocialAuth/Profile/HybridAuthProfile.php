@@ -14,6 +14,18 @@ class HybridAuthProfile implements ProfileInterface {
 	 */
 	protected $profile;
 
+	/**
+	 * @param Hybrid_User_Profile $profile
+	 */
+	public function __construct(Hybrid_User_Profile $profile) {
+		$this->setProfile($profile);
+	}
+
+	/**
+	 * Set the Hybrid_User_Profile we want to wrap into a ProfileInterface
+	 * 
+	 * @param Hybrid_User_Profile $profile
+	 */
 	public function setProfile(Hybrid_User_Profile $profile) {
 		$this->profile = $profile;
 	}
