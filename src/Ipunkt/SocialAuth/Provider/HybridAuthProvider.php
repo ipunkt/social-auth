@@ -72,7 +72,7 @@ class HybridAuthProvider implements ProviderInterface {
 	 * @return string
 	 */
 	public function loginLink($innerHtml) {
-		$this->makeLink('social.login', $innerHtml);
+		return $this->makeLink('social.login', $innerHtml);
 	}
 
 	/**
