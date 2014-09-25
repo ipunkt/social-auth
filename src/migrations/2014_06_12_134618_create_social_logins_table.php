@@ -22,10 +22,10 @@ class CreateSocialLoginsTable extends Migration {
             if(Config::has('social-auth::user_table')) {
                 $user_table = Config::get('social-auth::user_table');
                 if($user_table === null)
-                    $user_table = Config::get('auth::user_table.table name');
+                    $user_table = Config::get('auth::user_table.table_name');
                 $id = 'id';
-                if(Config::has('social-auth::user_table id'))
-                    $id = Config::get('social-auth::user_table id');
+                if(Config::has('social-auth::user_table_id'))
+                    $id = Config::get('social-auth::user_table_id');
                 $table->foreign('user_id')->references($id)->on($user_table)->onDelete('cascade');
             }
 		});
