@@ -82,7 +82,7 @@ class HybridAuthProvider implements ProviderInterface {
 	 * @return mixed
 	 */
 	public function attachLink($innerHtml) {
-		$this->makeLink('social.attach', $innerHtml);
+		return $this->makeLink('social.attach', $innerHtml);
 	}
 
 	/**
@@ -92,7 +92,7 @@ class HybridAuthProvider implements ProviderInterface {
 	 * @return mixed
 	 */
 	public function registerLink($innerHtml) {
-		$this->makeLink('social.register', $innerHtml);
+		return $this->makeLink('social.register', $innerHtml);
 	}
 
 
