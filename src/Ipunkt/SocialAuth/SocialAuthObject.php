@@ -71,8 +71,11 @@ class SocialAuthObject implements SocialAuthInterface {
 	 */
 	public function getProviders() {
 		$hybridAuthProviders = $this->hybridAuth->getProviders();
+		$providerList = [];
+		foreach($hybridAuthProviders as $providerName => $config)
+			$providerList[] = $providerName;
 
-		$providers = $this->makeProviders($hybridAuthProviders);
+		$providers = $this->makeProviders($providerList);
 
 		return $providers;
 	}
