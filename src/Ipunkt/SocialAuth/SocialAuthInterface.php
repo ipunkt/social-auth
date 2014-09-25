@@ -36,27 +36,6 @@ interface SocialAuthInterface {
      */
     function getRegisteration();
 
-    /**
-     * Returns a Collection with registration links for all enabled providers 
-     * 
-     * @return SocialLink[]|Collection
-     */
-    function getRegistrationLinks();
-
-    /**
-     * Returns a Collection with attach links for all enabled providers
-     *
-     * @return SocialLink[]|Collection
-     */
-    function getAttachLinks();
-
-    /**
-     * Returns a Collection with login links for all enabled providers
-     *
-     * @return SocialLink[]|Collection
-     */
-    function getLoginLinks();
-
 	/**
 	 * Returns all enabled provider from the config
 	 * 

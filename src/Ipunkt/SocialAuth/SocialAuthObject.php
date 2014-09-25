@@ -64,51 +64,6 @@ class SocialAuthObject implements SocialAuthInterface {
         return $this->makeLinks('social.register');
     }
 
-    /**
-     * Returns a Collection with attach links for all enabled providers
-     *
-     * @return SocialLink[]|Collection
-     */
-    public function getAttachLinks() {
-        return $this->makeLinks('social.attach');
-    }
-
-    /**
-     * Returns a Collection with login links for all enabled providers
-     *
-     * @return SocialLink[]|Collection
-     */
-    public function getLoginLinks() {
-        return $this->makeLinks('social.login');
-    }
-
-    /**
-     * Helper function which
-     * 
-     * @param $route
-     * @return array
-     */
-    protected function makeLinks($route) {
-        $links = [];
-
-        $providers = Config::get('social-auth::providers');
-        foreach($providers  as $provider_name => $values) {
-            if(array_key_exists('enabled', $values) && $values['enabled']) {
-                $link = new SocialLink();
-    
-                $link->name = $provider_name;
-                $link->url = route($route, $provider_name);
-    
-                if(array_key_exists('image', $values))
-                    $links->image = $values['image'];
-    
-                $links[] = $link;
-            }
-        }
-
-        return $links;
-    }
-
 	/**
 	 * Returns all enabled provider from the config
 	 *
@@ -144,7 +99,7 @@ class SocialAuthObject implements SocialAuthInterface {
 		$providers = [];
 		
 		foreach ( $hybridAuthProviders as $hybridAuthProvider )
-			$providers[] = new HybridAuthProvider($this->hybridAuth->getAdapter($hybridAuthProvider));
+			$providers[] = new HybridAuthProvider($hybridAuthProvider, $this->hybridAuth->getAdapter($hybridAuthProvider));
 		
 		return $providers;
 	}

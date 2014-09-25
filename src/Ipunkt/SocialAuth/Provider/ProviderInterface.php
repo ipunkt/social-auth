@@ -1,4 +1,5 @@
 <?php namespace Ipunkt\SocialAuth\Provider;
+use Ipunkt\SocialAuth\Profile\ProfileInterface;
 
 
 /**
@@ -33,4 +34,28 @@ interface ProviderInterface {
 	 * @return ProfileInterface
 	 */
 	function getProfile();
+
+	/**
+	 * Returns an html link which will let the user log in through this provider
+	 *
+	 * @param $innerHtml
+	 * @return string
+	 */
+	function loginLink($innerHtml);
+
+	/**
+	 * Returns an html link which will let the logged in user attach an account from this provider
+	 * 
+	 * @param $innerHtml
+	 * @return mixed
+	 */
+	function attachLink($innerHtml);
+
+	/**
+	 * Returns an html link which will let the user register using an account from this provider
+	 * 
+	 * @param $innerHtml
+	 * @return mixed
+	 */
+	function registerLink($innerHtml);
 } 

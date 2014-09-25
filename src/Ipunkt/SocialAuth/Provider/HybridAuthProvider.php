@@ -16,9 +16,18 @@ class HybridAuthProvider implements ProviderInterface {
 	 * @var Hybrid_Provider_Adapter
 	 */
 	private $adapter;
+	/**
+	 * @var
+	 */
+	private $providerName;
 
-	public function __construct(Hybrid_Provider_Adapter $adapter) {
+	/**
+	 * @param $providerName
+	 * @param Hybrid_Provider_Adapter $adapter
+	 */
+	public function __construct($providerName, Hybrid_Provider_Adapter $adapter) {
 		$this->adapter = $adapter;
+		$this->providerName = $providerName;
 	}
 
 	/**
@@ -37,7 +46,7 @@ class HybridAuthProvider implements ProviderInterface {
 	 */
 	public function getIdentifier() {
 		// TODO: find identifier from the adapter
-		dd($this->adapter->config);
+		return $this->providerName;
 	}
 
 	/**
@@ -56,5 +65,38 @@ class HybridAuthProvider implements ProviderInterface {
 		return new HybridAuthProfile($this->adapter->getUserProfile());
 	}
 
+	/**
+	 * Returns an html link which will let the user log in through this provider
+	 *
+	 * @param $innerHtml
+	 * @return string
+	 */
+	public function loginLink($innerHtml) {
+		$this->makeLink('social.login', $innerHtml);
+	}
 
+	/**
+	 * Returns an html link which will let the logged in user attach an account from this provider
+	 *
+	 * @param $innerHtml
+	 * @return mixed
+	 */
+	public function attachLink($innerHtml) {
+		$this->makeLink('social.attach', $innerHtml);
+	}
+
+	/**
+	 * Returns an html link which will let the user register using an account from this provider
+	 *
+	 * @param $innerHtml
+	 * @return mixed
+	 */
+	public function registerLink($innerHtml) {
+		$this->makeLink('social.register', $innerHtml);
+	}
+
+
+	protected function makeLink($route, $innerHtml) {
+		return '<a href="'.route($route, $this->providerName).'">'.$innerHtml.'</a>';
+	}
 } 

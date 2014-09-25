@@ -78,16 +78,25 @@ Allowing your users to register using a provider account requires a little more 
 
 #### Links to all enabled Providers
 Most of the time you will want to provide links to all enabled providers instead of a certain one.  
-SocialAuth::get*Links() provides a list of SocialLinkInterfaces for all enabled providers
+To do this, use `SocialAuth::getProviders()` to grab all enabled providers and use *Link($innerHtml) to have it build a link
+for you.  
 
-- SocialAuth::getRegisterLinks()
-- SocialAuth::getLoginLinks()
-- SocialAuth::getAttachLinks()
+- ProviderInterface::loginLink($innerHtml)
+- ProviderInterface::attachLink($innerHtml)
+- ProviderInterface::registerLink($innerHtml)
 
 Example:
+
 ```blade
-@foreach(SocialAuth::getLoginLinks() as $link)
-    {{ $link->getLink($link->getName()) }}
+@foreach(SocialAuth::getProviders() as $provider)
+    // A link which lets you login through this provider
+    {{ $provider->loginLink($provider->getName()) }}
+    
+    // A link which lets you attach a user from this provider to your local account
+    {{ $provider->attachLink($provider->getName()) }}
+    
+    // A link which lets a user request a running registration to use an account on this provider to login
+    {{ $provider->registerLink($provider->getName()) }}
 @endforeach
 ```
 
