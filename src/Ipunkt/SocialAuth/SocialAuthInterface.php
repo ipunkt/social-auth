@@ -27,14 +27,14 @@ interface SocialAuthInterface {
      * 
      * @return boolean
      */
-    function hasRegisteration();
+    function hasRegistration();
 
     /**
      * If present, returns the RegisterInfoInterface which lets you access the account data
      * 
      * @return RegisterInfoInterface|null
      */
-    function getRegisteration();
+    function getRegistration();
 
 	/**
 	 * Returns all enabled provider from the config

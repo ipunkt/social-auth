@@ -27,7 +27,7 @@ class SocialAuthObject implements SocialAuthInterface {
 	}
 
     /**
-     * Sets the RegisterInfoInterface to be received by getRegisteration
+     * Sets the RegisterInfoInterface to be received by getRegistration
      * Used internaly
      *
      * @param RegisterInfoInterface $info
@@ -41,7 +41,7 @@ class SocialAuthObject implements SocialAuthInterface {
      *
      * @return boolean
      */
-    public function hasRegisteration() {
+    public function hasRegistration() {
         return Session::has(self::REGISTER_INFO_SESSION);
     }
 
@@ -50,7 +50,7 @@ class SocialAuthObject implements SocialAuthInterface {
      *
      * @return RegisterInfoInterface|null
      */
-    public function getRegisteration() {
+    public function getRegistration() {
         Session::keep(self::REGISTER_INFO_SESSION);
         return Session::get(self::REGISTER_INFO_SESSION);
     }
