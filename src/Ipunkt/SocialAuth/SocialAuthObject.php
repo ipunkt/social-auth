@@ -4,7 +4,6 @@ use Hybrid_Auth;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
 use Ipunkt\SocialAuth\Provider\HybridAuthProvider;
-use Ipunkt\SocialAuth\SocialLink\SocialLink;
 use \Config;
 use ProviderInterface;
 

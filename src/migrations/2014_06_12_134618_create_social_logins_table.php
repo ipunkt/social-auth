@@ -26,6 +26,8 @@ class CreateSocialLoginsTable extends Migration {
                 $id = 'id';
                 if(Config::has('social-auth::user_table_id'))
                     $id = Config::get('social-auth::user_table_id');
+	            \Log::info('Id: '.$id);
+	            \Log::info('user table: '.$user_table);
                 $table->foreign('user_id')->references($id)->on($user_table)->onDelete('cascade');
             }
 		});
