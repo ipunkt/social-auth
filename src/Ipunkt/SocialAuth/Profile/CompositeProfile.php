@@ -68,7 +68,7 @@ class CompositeProfile implements ProfileGetInterface {
 	 * @return ProviderInterface
 	 */
 	function getProvider() {
-		$this->getValue('getProvider');
+		$this->getValue('Provider');
 	}
 
 
@@ -76,154 +76,154 @@ class CompositeProfile implements ProfileGetInterface {
 	 * @return string
 	 */
 	function getIdentifier() {
-		return $this->getValue('getIdentifier');
+		return $this->getValue('Identifier');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getProfileUrl() {
-		return $this->getValue('getProfileUrl');
+		return $this->getValue('ProfileUrl');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getWebsiteUrl() {
-		$this->getValue('getWebsiteUrl');
+		$this->getValue('WebsiteUrl');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getPhotoUrl() {
-		$this->getValue('getPhotoUrl');
+		$this->getValue('PhotoUrl');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getDisplayName() {
-		$this->getValue('getDisplayName');
+		$this->getValue('DisplayName');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getDescription() {
-		$this->getValue('getDescription');
+		$this->getValue('Description');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getFirstName() {
-		$this->getValue('getFirstName');
+		$this->getValue('FirstName');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getLastName() {
-		$this->getValue('getLastName');
+		$this->getValue('LastName');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getGender() {
-		$this->getValue('getGender');
+		$this->getValue('Gender');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getLanguage() {
-		$this->getValue('getLanguage');
+		$this->getValue('Language');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getAge() {
-		$this->getValue('getAge');
+		$this->getValue('Age');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getBirthDay() {
-		$this->getValue('getBirthDay');
+		$this->getValue('BirthDay');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getBirthMonth() {
-		$this->getValue('getBirthMonth');
+		$this->getValue('BirthMonth');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getBirthYear() {
-		$this->getValue('getBirthYear');
+		$this->getValue('BirthYear');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getEmail() {
-		$this->getValue('getEmail');
+		$this->getValue('Email');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getVerifiedEmail() {
-		$this->getValue('getVerifiedEmail');
+		$this->getValue('VerifiedEmail');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getPhone() {
-		$this->getValue('getPhone');
+		$this->getValue('Phone');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getAddress() {
-		$this->getValue('getAddress');
+		$this->getValue('Address');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getCountry() {
-		$this->getValue('getCountry');
+		$this->getValue('Country');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getRegion() {
-		$this->getValue('getRegion');
+		$this->getValue('Region');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getCity() {
-		$this->getValue('getCity');
+		$this->getValue('City');
 	}
 
 	/**
 	 * @return string
 	 */
 	function getZip() {
-		$this->getValue('getZip');
+		$this->getValue('Zip');
 	}
 
 
