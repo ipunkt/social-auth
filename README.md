@@ -105,13 +105,13 @@ Access to the user profile is done through the providers.
 The ProviderInterface provides `getProfile()` which returns a `ProfileInterface`.
 
 ```php
-$providers = SocialAuth::getProviers();
+$providers = SocialAuth::getProviders();
 echo $providers['Facebook']->getProfile()->getPhotoUrl()
 ```
 
 ProfileInterface
 Function            | returned value
---------------------|-----------
+------------------- | --------------
 getIdentifier	    | The unique identifier string by which the provider identifies the user
 getProfileUrl	    | Profile URL
 getWebsiteUrl	    | Website URL
@@ -135,8 +135,9 @@ getRegion	        | Region
 getCity	            | City
 getZip	            | ZIP or Postal code
 
-TODO 1: store the profile in the Database to make it accessible even if the user is not logged in through this provider.
-TODO 2: make an unspecific Profile which uses data from all available providers
+TODO
+- store the profile in the Database to make it accessible even if the user is not logged in through this provider.
+- make an unspecific Profile which uses data from all available providers
 
 ### Return Url
 Your provider will ask you to set a return url where user logging into your application get sent.

@@ -1,7 +1,5 @@
-<?php
+<?php namespace Ipunkt\SocialAuth;
 
-
-namespace Ipunkt\SocialAuth;
 use Illuminate\Support\Collection;
 use ProviderInterface;
 
