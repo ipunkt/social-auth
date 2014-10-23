@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSocialLoginsTable extends Migration {
+class RenameSocialLoginsSocialProfiles extends Migration {
 
 	/**
 	 * Run the migrations.
