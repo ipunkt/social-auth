@@ -1,6 +1,7 @@
 <?php namespace Ipunkt\SocialAuth\Provider;
 
 use Hybrid_Provider_Adapter;
+use Illuminate\Auth\UserInterface;
 use Ipunkt\SocialAuth\Profile\CompositeProfile;
 use Ipunkt\SocialAuth\Profile\HybridAuthProfile;
 use Ipunkt\SocialAuth\Profile\ProfileGetInterface;
@@ -13,6 +14,10 @@ use Ipunkt\SocialAuth\Repositories\SocialProfileRepository;
  * Provides the ProviderInterface for a Hybrid_Auth_Provider
  */
 class HybridAuthProvider implements ProviderInterface {
+	/**
+	 * @var UserInterface
+	 */
+	protected $user;
 
 	/**
 	 * @var Hybrid_Provider_Adapter
@@ -33,6 +38,8 @@ class HybridAuthProvider implements ProviderInterface {
 	 * @param Hybrid_Provider_Adapter $adapter
 	 */
 	public function __construct(SocialProfileRepository $profileRepository, $providerName, Hybrid_Provider_Adapter $adapter) {
+		// FIXME: Have the user passed in?
+		$this->user = Auth::user();
 		$this->adapter = $adapter;
 		$this->providerName = $providerName;
 		$this->profileRepository = $profileRepository;
@@ -70,14 +77,17 @@ class HybridAuthProvider implements ProviderInterface {
 	 * @return ProfileGetInterface
 	 */
 	public function getProfile() {
+		
 		$readProviders = [];
 		
+		$h_profile = new HybridAuthProfile($this, $this->adapter->getUserProfile());
+
+		$db_profile = $this->profileRepository->findByUser($user, $this->providerName);
+		
 		if($this->adapter->isUserConnected())
-			$readProviders[] = new HybridAuthProfile($this, $this->adapter->getUserProfile());
-		
-		$db_profile = $this->profileRepository->findByAuth($this->providerName, $h_profile->getIdentifier());
-		
+			$readProviders[] = $h_profile;
 		$readProviders[] = $db_profile;
+		
 		return new CompositeProfile($this, $readProviders, [$db_profile]);
 	}
 

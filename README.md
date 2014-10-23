@@ -109,7 +109,8 @@ $providers = SocialAuth::getProviders();
 echo $providers['Facebook']->getProfile()->getPhotoUrl()
 ```
 
-ProfileInterface
+ProfileInterface  
+
 Function            | returned value
 ------------------- | --------------
 getIdentifier	    | The unique identifier string by which the provider identifies the user
