@@ -10,7 +10,7 @@ namespace Ipunkt\SocialAuth\Repositories;
 
 
 use Illuminate\Auth\UserInterface;
-use Ipunkt\SocialAuth\SocialLogin;
+use Ipunkt\SocialAuth\SocialProfile;
 
 /**
  * Class EloquentUserRepository

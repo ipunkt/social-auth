@@ -5,7 +5,7 @@ use Ipunkt\SocialAuth\SocialLoginInterface;
 
 interface SocialLoginRepository {
     /**
-     * return SocialLogin by id or null if not found
+     * return SocialProfile by id or null if not found
      *
      * @param int $id
      * @return SocialLoginInterface|null
@@ -13,7 +13,7 @@ interface SocialLoginRepository {
     function find($id);
 
     /**
-     * find SocialLogin by id or throw exception if not found
+     * find SocialProfile by id or throw exception if not found
      *
      * @param int $id
      * @return SocialLoginInterface|null
@@ -21,7 +21,7 @@ interface SocialLoginRepository {
     function findOrFail($id);
 
     /**
-     * return SocialLogin by the name of the provider and the identifier this provider has given for the user, or null
+     * return SocialProfile by the name of the provider and the identifier this provider has given for the user, or null
      * if not found
      *
      * @param string $provider

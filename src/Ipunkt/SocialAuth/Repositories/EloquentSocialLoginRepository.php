@@ -1,6 +1,6 @@
 <?php namespace Ipunkt\SocialAuth\Repositories;
 
-use Ipunkt\SocialAuth\SocialLogin;
+use Ipunkt\SocialAuth\SocialProfile;
 use Ipunkt\SocialAuth\SocialLoginInterface;
 
 /**
@@ -12,41 +12,41 @@ use Ipunkt\SocialAuth\SocialLoginInterface;
  */
 class EloquentSocialLoginRepository implements SocialLoginRepository, SocialProfileRepository {
     /**
-     * return SocialLogin by id or null if not found
+     * return SocialProfile by id or null if not found
      *
      * @param int $id
      * @return SocialLoginInterface|null
      */
     public function find($id) {
-        return SocialLogin::find($id);
+        return SocialProfile::find($id);
     }
 
     /**
-     * find SocialLogin by id or throw exception if not found
+     * find SocialProfile by id or throw exception if not found
      *
      * @param int $id
      * @return SocialLoginInterface|null
      */
     public function findOrFail($id) {
-        return SocialLogin::findOrFail($id);
+        return SocialProfile::findOrFail($id);
     }
 
     /**
-     * return SocialLogin by the name of the provider and the identifier this provider has given for the user, or null
+     * return SocialProfile by the name of the provider and the identifier this provider has given for the user, or null
      * if not found
      *
      * @param string $provider
      * @param string $identifier |null
      */
     public function findByAuth($provider, $identifier) {
-        return SocialLogin::where('provider', '=', $provider)->whereIdentifier($identifier)->first();
+        return SocialProfile::where('provider', '=', $provider)->whereIdentifier($identifier)->first();
     }
 
     /**
      * @return SocialLoginInterface
      */
     public function create() {
-        return new SocialLogin();
+        return new SocialProfile();
     }
 
     /**
@@ -55,7 +55,7 @@ class EloquentSocialLoginRepository implements SocialLoginRepository, SocialProf
      */
     public function save(SocialLoginInterface $login) {
         /**
-         * @var SocialLogin $login
+         * @var SocialProfile $login
          */
         return $login->save();
     }
