@@ -81,12 +81,11 @@ class HybridAuthProvider implements ProviderInterface {
 		
 		$readProviders = [];
 		
-		$h_profile = new HybridAuthProfile($this, $this->adapter->getUserProfile());
 
-		$db_profile = $this->profileRepository->findByUser($user, $this->providerName);
+		$db_profile = $this->profileRepository->findByUser($this->user, $this->providerName);
 		
 		if($this->adapter->isUserConnected())
-			$readProviders[] = $h_profile;
+			$readProviders[] = new HybridAuthProfile($this, $this->adapter->getUserProfile());
 		$readProviders[] = $db_profile;
 		
 		return new CompositeProfile($this, $readProviders, [$db_profile]);
