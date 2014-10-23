@@ -2,6 +2,7 @@
 
 use Hybrid_Provider_Adapter;
 use Illuminate\Auth\UserInterface;
+use Illuminate\Support\Facades\Auth;
 use Ipunkt\SocialAuth\Profile\CompositeProfile;
 use Ipunkt\SocialAuth\Profile\HybridAuthProfile;
 use Ipunkt\SocialAuth\Profile\ProfileGetInterface;
