@@ -1,5 +1,5 @@
 <?php namespace Ipunkt\SocialAuth\Provider;
-use Ipunkt\SocialAuth\Profile\ProfileInterface;
+use Ipunkt\SocialAuth\Profile\ProfileGetInterface;
 
 
 /**
@@ -31,7 +31,7 @@ interface ProviderInterface {
 	function getName();
 
 	/**
-	 * @return ProfileInterface
+	 * @return ProfileGetInterface
 	 */
 	function getProfile();
 

@@ -1,8 +1,10 @@
 <?php namespace Ipunkt\SocialAuth\Provider;
 
 use Hybrid_Provider_Adapter;
+use Ipunkt\SocialAuth\Profile\CompositeProfile;
 use Ipunkt\SocialAuth\Profile\HybridAuthProfile;
-use Ipunkt\SocialAuth\Profile\ProfileInterface;
+use Ipunkt\SocialAuth\Profile\ProfileGetInterface;
+use Ipunkt\SocialAuth\Repositories\SocialProfileRepository;
 
 /**
  * Class HybridAuthProvider
@@ -20,14 +22,20 @@ class HybridAuthProvider implements ProviderInterface {
 	 * @var
 	 */
 	private $providerName;
+	/**
+	 * @var SocialProfileRepository
+	 */
+	private $profileRepository;
 
 	/**
+	 * @param SocialProfileRepository $profileRepository
 	 * @param $providerName
 	 * @param Hybrid_Provider_Adapter $adapter
 	 */
-	public function __construct($providerName, Hybrid_Provider_Adapter $adapter) {
+	public function __construct(SocialProfileRepository $profileRepository, $providerName, Hybrid_Provider_Adapter $adapter) {
 		$this->adapter = $adapter;
 		$this->providerName = $providerName;
+		$this->profileRepository = $profileRepository;
 	}
 
 	/**
@@ -59,10 +67,12 @@ class HybridAuthProvider implements ProviderInterface {
 	}
 
 	/**
-	 * @return ProfileInterface
+	 * @return ProfileGetInterface
 	 */
 	public function getProfile() {
-		return new HybridAuthProfile($this->adapter->getUserProfile());
+		$h_profile = new HybridAuthProfile($this, $this->adapter->getUserProfile());
+		$db_profile = $this->profileRepository->findByAuth($this->providerName, $h_profile->getIdentifier());
+		return new CompositeProfile($this, [$h_profile, $db_profile], [$db_profile]);
 	}
 
 	/**

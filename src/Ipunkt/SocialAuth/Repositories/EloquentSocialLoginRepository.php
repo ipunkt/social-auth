@@ -6,8 +6,11 @@ use Ipunkt\SocialAuth\SocialLoginInterface;
 /**
  * Class EloquentSocialLoginRepository
  * @package Ipunkt\SocialAuth\Repositories
+ * 
+ * Since the default database structure has the profile as a single table instead of a 1-to-1 relationship, this repository
+ * doubles as both SocialLoginRepository and SocialProfileRepository
  */
-class EloquentSocialLoginRepository implements SocialLoginRepository {
+class EloquentSocialLoginRepository implements SocialLoginRepository, SocialProfileRepository {
     /**
      * return SocialLogin by id or null if not found
      *

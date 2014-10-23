@@ -52,7 +52,7 @@ Migrate the necessary database tables.
 ### Error and Message Handling
 This package tries not to bring any views of its own, thus error handling is done through the session.
 On success, 'message' will be set directly in the Session. e.g. `{{ Session::get('message') }}`
-On error, 'meesage' will be set in errors. e.g. {{ $errors->first('message') }}
+On error, 'message' will be set in errors. e.g. {{ $errors->first('message') }}
 
 ### Simple Use
 
@@ -100,6 +100,44 @@ Example:
 @endforeach
 ```
 
+#### Profile
+Access to the user profile is done through the providers.  
+The ProviderInterface provides `getProfile()` which returns a `ProfileInterface`.
+
+```php
+$providers = SocialAuth::getProviers();
+echo $providers['Facebook']->getProfile()->getPhotoUrl()
+```
+
+ProfileInterface
+Function            | returned value
+--------------------|-----------
+getIdentifier	    | The unique identifier string by which the provider identifies the user
+getProfileUrl	    | Profile URL
+getWebsiteUrl	    | Website URL
+getPhotoUrl	        | Photo URL
+getDisplayName	    | Display name or "$firstName $lastName"
+getDescription	    | 
+getFirstName	    | First name
+getLastName	        | Last name
+getGender	        | Gender
+getLanguage	        | Language
+getAge	            | Age
+getBirthDay	        | Day of Birth
+getBirthMonth	    | Month of Birth
+getBirthYear	    | Year of Birth
+getEmail	        | Email
+getVerifiedEmail	| Verified Email if the provider allows it
+getPhone	        | Phone number
+getAddress	        | Address
+getCountry	        | Country
+getRegion	        | Region
+getCity	            | City
+getZip	            | ZIP or Postal code
+
+TODO 1: store the profile in the Database to make it accessible even if the user is not logged in through this provider.
+TODO 2: make an unspecific Profile which uses data from all available providers
+
 ### Return Url
 Your provider will ask you to set a return url where user logging into your application get sent.
 This is static: http://path.to/your/laravel/installation/social/auth
@@ -120,7 +158,3 @@ bind this repository to 'Ipunkt\SocialAuth\SocialLoginInterface' in the Laravel 
 Create a repository which implements the UserRepository interface
 
 bind this repository to 'Ipunkt\SocialAuth\Repositories\UserRepository' in the Laravel IoC
-
-## TODO
-
-- Set the base_url config variable for hybridauth through code

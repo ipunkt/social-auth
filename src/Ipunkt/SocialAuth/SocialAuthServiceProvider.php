@@ -61,6 +61,8 @@ class SocialAuthServiceProvider extends ServiceProvider {
 			'Ipunkt\SocialAuth\Repositories\EloquentUserRepository');
 		$this->app->bind('Ipunkt\SocialAuth\Repositories\SocialLoginRepository',
 			'Ipunkt\SocialAuth\Repositories\EloquentSocialLoginRepository');
+		$this->app->bind('Ipunkt\SocialAuth\Repositories\SocialProfileRepository',
+			'Ipunkt\SocialAuth\Repositories\EloquentSocialLoginRepository');
 		$this->app->bind('Ipunkt\SocialAuth\SocialAuthInterface',
 			'Ipunkt\SocialAuth\SocialAuthObject');
 	}

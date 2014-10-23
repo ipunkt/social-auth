@@ -42,7 +42,6 @@ class SocialLoginController extends \BaseController {
                 Auth::login($user);
                 $response = Redirect::intended('/');
             } else {
-                // TODO: Add firing new User event.
                 $response = Redirect::route('social.register', ['provider' => $provider_name]);
             }
         } catch(Exception $e) {

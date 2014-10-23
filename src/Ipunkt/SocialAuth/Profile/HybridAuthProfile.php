@@ -1,6 +1,7 @@
 <?php namespace Ipunkt\SocialAuth\Profile;
 
 use Hybrid_User_Profile;
+use Ipunkt\SocialAuth\Provider\ProviderInterface;
 
 /**
  * Class HybridAuthProfile
@@ -8,28 +9,41 @@ use Hybrid_User_Profile;
  * 
  * Wrapper around Hybrid_User_Profile
  */
-class HybridAuthProfile implements ProfileInterface {
+class HybridAuthProfile implements ProfileGetInterface {
 	/**
 	 * @var Hybrid_User_Profile
 	 */
 	protected $profile;
+	/**
+	 * @var ProviderInterface
+	 */
+	private $provider;
 
 	/**
+	 * @param ProviderInterface $provider
 	 * @param Hybrid_User_Profile $profile
 	 */
-	public function __construct(Hybrid_User_Profile $profile) {
+	public function __construct(ProviderInterface $provider, Hybrid_User_Profile $profile) {
 		$this->setProfile($profile);
+		$this->provider = $provider;
 	}
 
 	/**
-	 * Set the Hybrid_User_Profile we want to wrap into a ProfileInterface
+	 * Set the Hybrid_User_Profile we want to wrap into a ProfileGetInterface
 	 * 
 	 * @param Hybrid_User_Profile $profile
 	 */
 	public function setProfile(Hybrid_User_Profile $profile) {
 		$this->profile = $profile;
 	}
-	
+
+	/**
+	 * @return ProviderInterface
+	 */
+	function getProvider() {
+		return $this->provider;
+	}
+
 	/**
 	 * @return string
 	 */

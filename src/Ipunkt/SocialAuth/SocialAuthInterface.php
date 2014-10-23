@@ -3,7 +3,6 @@
 
 namespace Ipunkt\SocialAuth;
 use Illuminate\Support\Collection;
-use Ipunkt\SocialAuth\Composers\SocialLink;
 use ProviderInterface;
 
 
