@@ -148,4 +148,10 @@ interface ProfileSetInterface {
 	 * @return null
 	 */
 	function setZip($value);
+
+	/**
+	 * @param ProfileGetInterface $profile
+	 * @return mixed
+	 */
+	function copy(ProfileGetInterface $profile);
 } 

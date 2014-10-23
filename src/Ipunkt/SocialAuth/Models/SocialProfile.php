@@ -4,6 +4,7 @@
 use Config;
 use \Eloquent;
 use Illuminate\Auth\UserInterface;
+use Ipunkt\SocialAuth\Profile\ProfileCopyTrait;
 use Ipunkt\SocialAuth\Profile\ProfileGetInterface;
 use Ipunkt\SocialAuth\Profile\ProfileSetInterface;
 
@@ -12,6 +13,7 @@ use Ipunkt\SocialAuth\Profile\ProfileSetInterface;
  * @property string provider
  * @property string identifier
  * @property UserInterface user
+ * @property int $user_id
  * 
  * @property string $profile_url
  * @property string $website_url
@@ -39,6 +41,8 @@ use Ipunkt\SocialAuth\Profile\ProfileSetInterface;
  *
  */
 class SocialProfile extends Eloquent implements SocialLoginInterface, ProfileGetInterface, ProfileSetInterface {
+	use ProfileCopyTrait;
+	
     /**
      * @var string
      */
@@ -430,9 +434,6 @@ class SocialProfile extends Eloquent implements SocialLoginInterface, ProfileGet
 	public function setZip($value) {
 		$this->zip = $value;
 	}
-
-	public function __destruct() {
-		$this->save();
-	}
+	
 	
 }
