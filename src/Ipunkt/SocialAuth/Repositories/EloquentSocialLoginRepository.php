@@ -1,6 +1,7 @@
 <?php namespace Ipunkt\SocialAuth\Repositories;
 
 use Illuminate\Auth\UserInterface;
+use Ipunkt\SocialAuth\Profile\ProfileSetInterface;
 use Ipunkt\SocialAuth\SocialProfile;
 use Ipunkt\SocialAuth\SocialLoginInterface;
 
@@ -70,6 +71,16 @@ class EloquentSocialLoginRepository implements SocialLoginRepository, SocialProf
 	 */
 	function findByUserAndProvider(UserInterface $user, $providerName) {
 		return SocialProfile::where('provider', '=', $providerName)->whereUserId($user->getAuthIdentifier())->first();
+	}
+
+	/**
+	 * Attempt to save the profile to the database
+	 *
+	 * @param ProfileSetInterface $profile
+	 * @return bool
+	 */
+	function saveProfile(ProfileSetInterface $profile) {
+		$profile->save();
 	}
 
 

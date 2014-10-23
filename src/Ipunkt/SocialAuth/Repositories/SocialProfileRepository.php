@@ -27,5 +27,5 @@ interface SocialProfileRepository {
 	 * @param ProfileSetInterface $profile
 	 * @return bool
 	 */
-	function save(ProfileSetInterface $profile);
+	function saveProfile(ProfileSetInterface $profile);
 } 
