@@ -431,4 +431,9 @@ class SocialProfile extends Eloquent implements SocialLoginInterface, ProfileGet
 		$this->zip = $value;
 	}
 
+	public function __destruct() {
+		$this->save();
+		parent::__destruct();
+	}
+	
 }
