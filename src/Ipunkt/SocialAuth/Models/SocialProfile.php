@@ -433,7 +433,6 @@ class SocialProfile extends Eloquent implements SocialLoginInterface, ProfileGet
 
 	public function __destruct() {
 		$this->save();
-		parent::__destruct();
 	}
 	
 }
