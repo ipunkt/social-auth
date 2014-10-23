@@ -4,7 +4,8 @@ use Hybrid_Auth;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
 use Ipunkt\SocialAuth\Provider\HybridAuthProvider;
-use \Config;
+use Config;
+use Ipunkt\SocialAuth\Repositories\SocialProfileRepository;
 use ProviderInterface;
 
 /**
@@ -20,9 +21,14 @@ class SocialAuthObject implements SocialAuthInterface {
 	 * @var Hybrid_Auth
 	 */
 	private $hybridAuth;
+	/**
+	 * @var SocialProfileRepository
+	 */
+	private $profileRepository;
 
-	public function __construct(Hybrid_Auth $hybridAuth) {
+	public function __construct(Hybrid_Auth $hybridAuth, SocialProfileRepository $profileRepository) {
 		$this->hybridAuth = $hybridAuth;
+		$this->profileRepository = $profileRepository;
 	}
 
     /**
@@ -101,8 +107,8 @@ class SocialAuthObject implements SocialAuthInterface {
 		$providers = [];
 		
 		foreach ( $hybridAuthProviders as $hybridAuthProvider )
-			$providers[] = new HybridAuthProvider($hybridAuthProvider, $this->hybridAuth->getAdapter($hybridAuthProvider));
-		
+			$providers[] = new HybridAuthProvider($this->profileRepository, $hybridAuthProvider, $this->hybridAuth->getAdapter($hybridAuthProvider));
+	
 		return $providers;
 	}
 } 
