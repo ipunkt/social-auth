@@ -3,6 +3,7 @@
 use App;
 use Auth;
 use Config;
+use Event;
 use Hybrid_Auth;
 use Ipunkt\SocialAuth\Repositories\SocialLoginRepository;
 use Ipunkt\SocialAuth\Repositories\UserRepository;
