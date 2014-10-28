@@ -17,7 +17,7 @@ interface SocialProfileRepository {
 	 * 
 	 * @param UserInterface $user
 	 * @param string $providerName
-	 * @return mixed
+	 * @return ProfileInterface
 	 */
 	function findByUserAndProvider(UserInterface $user, $providerName);
 

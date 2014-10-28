@@ -1,6 +1,8 @@
 <?php namespace Ipunkt\SocialAuth\EventListeners;
+use Illuminate\Auth\UserInterface;
 use Ipunkt\SocialAuth\Profile\HasProfileInterface;
 use Ipunkt\SocialAuth\Profile\ProfileGetInterface;
+use Ipunkt\SocialAuth\RegisterInfoInterface;
 use Ipunkt\SocialAuth\Repositories\SocialProfileRepository;
 use Ipunkt\SocialAuth\SocialLoginInterface;
 
@@ -33,19 +35,13 @@ class UpdateProfileEventListener {
 	 * 
 	 * @param $parameters
 	 */
-	public function register($parameters) {
-		/**
-		 * @var HasProfileInterface $user
-		 */
-		$user = $parameters['user'];
-		/**
-		 * @var ProfileGetInterface $profile
-		 */
-		$profile = $parameters['profile'];
+	public function register(UserInterface $user, RegisterInfoInterface $registerInfo) {
 		
 		$database_profile = $this->socialProfileRepository->findByUserAndProvider($user, 'UserProfile');
 		if($database_profile === null) {
-			$this->copyProfileToDatabase($profile);
+			$database_profile = $this->socialProfileRepository->create();
+			$database_profile->setProvider('UserProfile');
+			$database_profile->setIdentifier($user->getAuthIdentifier());
 		}
 	}
 

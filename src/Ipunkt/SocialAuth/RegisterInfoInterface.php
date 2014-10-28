@@ -5,6 +5,7 @@ namespace Ipunkt\SocialAuth;
 
 
 use Illuminate\Auth\UserInterface;
+use Ipunkt\SocialAuth\Profile\ProfileGetInterface;
 
 /**
  * Interface RegisterInfoInterface
@@ -127,10 +128,18 @@ interface RegisterInfoInterface {
      * Query the info for a specific value
      * use the PROFILE_* constants to choose your information
      *
+     * @deprecated
      * @param string $info_name
      * @return mixed
      */
     function getInfo($info_name);
+
+	/**
+	 * Query the profile associated with this registration request
+	 * 
+	 * @return ProfileGetInterface
+	 */
+	function getProfile();
 
     /**
      * Notify the provider of the RegisterInfo that the user was now successfuly registered.
