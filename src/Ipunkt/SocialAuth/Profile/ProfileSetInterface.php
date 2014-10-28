@@ -2,6 +2,7 @@
 
 
 namespace Ipunkt\SocialAuth\Profile;
+use Illuminate\Auth\UserInterface;
 use Ipunkt\SocialAuth\Provider\ProviderInterface;
 
 
@@ -12,6 +13,12 @@ use Ipunkt\SocialAuth\Provider\ProviderInterface;
  * The saving counterpart to ProfileGetInterface. Intended to backup the profile to the database
  */
 interface ProfileSetInterface {
+	/**
+	 * @param $userid
+	 * @return mixed
+	 */
+	function setUser($userid);
+	
 	/**
 	 * @return ProviderInterface
 	 */
