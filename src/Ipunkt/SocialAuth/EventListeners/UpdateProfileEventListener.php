@@ -40,9 +40,11 @@ class UpdateProfileEventListener {
 		$database_profile = $this->socialProfileRepository->findByUserAndProvider($user, 'UserProfile');
 		if($database_profile === null) {
 			$database_profile = $this->socialProfileRepository->create();
-			$database_profile->copy($registerInfo->getProfile());
+			$profile = $registerInfo->getProfile();
+			$database_profile->copy($profile);
 			$database_profile->setProvider('UserProfile');
 			$database_profile->setUser($user->getAuthIdentifier());
+			$database_profile->setIdentifier($profile->getIdentifier());
 			$this->socialProfileRepository->saveProfile($database_profile);
 		}
 	}
