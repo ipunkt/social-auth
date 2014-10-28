@@ -1,6 +1,7 @@
 <?php namespace Ipunkt\SocialAuth;
 
 use App;
+use Event;
 use Hybrid_User_Profile;
 use Illuminate\Auth\UserInterface;
 use Ipunkt\SocialAuth\Repositories\SocialLoginRepository;
