@@ -82,7 +82,10 @@ class ProfileRegisterInfo implements RegisterInfoInterface {
         $login->setIdentifier($this->identifier);
         $login->setProvider($this->provider);
         $login->setUser($user->getAuthIdentifier());
-        return $repository->save($login);
+        $success = $repository->save($login);
+	    if($success)
+		    Event::fire('social-auth.register', ['login' => $login, 'user' => $user, 'provider' => $this->provider, 'profile' => $this->profile]);
+	    return $success;
     }
 
     /**

@@ -39,6 +39,8 @@ class SocialAuthServiceProvider extends ServiceProvider {
 		$this->setBinds();
 
         Event::listen('auth.logout', 'Ipunkt\SocialAuth\SocialLoginController@logout');
+		Event::listen('social-auth.register', 'Ipunkt\SocialAuth\EventListeners\UpdateProfileEventListener@register');
+		Event::listen('social-auth.attach', 'Ipunkt\SocialAuth\EventListeners\UpdateProfileEventListener@attach');
 	}
 
 

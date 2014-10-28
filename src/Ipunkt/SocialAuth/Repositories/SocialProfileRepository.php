@@ -28,4 +28,9 @@ interface SocialProfileRepository {
 	 * @return bool
 	 */
 	function saveProfile(ProfileSetInterface $profile);
+
+	/**
+	 * @return ProfileInterface
+	 */
+	function create();
 } 
