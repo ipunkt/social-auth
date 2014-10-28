@@ -137,13 +137,11 @@ class SocialRegisterController extends \BaseController {
         $route = Config::get('social-auth::register_route');
         $identifier = $this->auth($provider_name, $profile);
         if(!$this->checkRegistered($provider_name, $identifier)) {
-            $register_info = App::make('Ipunkt\SocialAuth\ProfileRegisterInfo');
+            $register_info = App::make('Ipunkt\SocialAuth\RegisterInfo');
             /**
-             * @var ProfileRegisterInfo $register_info
+             * @var RegisterInfo $register_info
              */
             $register_info->setProvider($provider_name);
-            $register_info->setIdentifier($identifier);
-            $register_info->setInfo($profile);
             
             SocialAuth::setRegistration($register_info);
             

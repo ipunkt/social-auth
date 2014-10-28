@@ -68,6 +68,10 @@ class ProfileRegisterInfo implements RegisterInfoInterface {
             $value = $this->profile->$info_name;
         return $value;
     }
+	
+	public function getProfile() {
+		return null;
+	}
 
     /**
      * Notify the provider of the RegisterInfo that the user was now successfuly registered.
