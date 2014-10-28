@@ -39,13 +39,10 @@ class UpdateProfileEventListener {
 		
 		$database_profile = $this->socialProfileRepository->findByUserAndProvider($user, 'UserProfile');
 		if($database_profile === null) {
-			$database_profile = $this->socialProfileRepository->create();
 			$profile = $registerInfo->getProfile();
-			$database_profile->copy($profile);
-			$database_profile->setProvider('UserProfile');
-			$database_profile->setUser($user->getAuthIdentifier());
-			$database_profile->setIdentifier($profile->getIdentifier());
-			$this->socialProfileRepository->saveProfile($database_profile);
+			
+			$this->copyProfileToDatabase($user, $profile);
+			
 		}
 	}
 
@@ -58,19 +55,10 @@ class UpdateProfileEventListener {
 	 * 
 	 * @param $parameters
 	 */
-	public function attach($parameters) {
-		/**
-		 * @var HasProfileInterface $user
-		 */
-		$user = $parameters['user'];
-		/**
-		 * @var ProfileGetInterface $profile
-		 */
-		$profile = $parameters['profile'];
-
+	public function attach($user, $profile) {
 		$database_profile = $this->socialProfileRepository->findByUserAndProvider($user, 'UserProfile');
 		if($database_profile === null) {
-			$this->copyProfileToDatabase($profile);
+			$this->copyProfileToDatabase($user, $profile);
 		}
 	}
 
@@ -80,10 +68,12 @@ class UpdateProfileEventListener {
 	 * @param ProfileGetInterface $profile
 	 * @return bool
 	 */
-	protected function copyProfileToDatabase(ProfileGetInterface $profile) {
-		$databaseProfile = $this->socialProfileRepository->create();
-		$databaseProfile->copy($profile);
-		$databaseProfile->setProvider("UserProfile");
-		return $this->socialProfileRepository->saveProfile($databaseProfile);
+	protected function copyProfileToDatabase($user, ProfileGetInterface $profile) {
+		$database_profile = $this->socialProfileRepository->create();
+		$database_profile->copy($profile);
+		$database_profile->setProvider('UserProfile');
+		$database_profile->setUser($user->getAuthIdentifier());
+		$database_profile->setIdentifier($profile->getIdentifier());
+		return $this->socialProfileRepository->saveProfile($database_profile);
 	}
 } 
