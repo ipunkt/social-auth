@@ -18,13 +18,13 @@ trait EloquentHasProfile {
 	 * @return HasOneRelationship
 	 */
 	public function socialProfile() {
-		return $this->hasOne('SocialProfile')->whereProvider('UserProfile');
+		return $this->hasOne('SocialProfile')->where('provider', '=', 'UserProfile');
 	}
 
 	/**
 	 * @return ProfileInterface
 	 */
 	public function getProfile() {
-		return $this->socialProfile;
+		return $this->socialProfile()->first();
 	}
 } 
