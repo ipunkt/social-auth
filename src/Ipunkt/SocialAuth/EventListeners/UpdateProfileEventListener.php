@@ -44,7 +44,7 @@ class UpdateProfileEventListener {
 		$profile = $parameters['profile'];
 		
 		if($user->getProfile() === null) {
-			$this->copyProfile($profile);
+			$this->copyProfileToDatabase($profile);
 		}
 	}
 
@@ -68,7 +68,7 @@ class UpdateProfileEventListener {
 		$profile = $parameters['profile'];
 		
 		if($user->getProfile() === null) {
-			$this->copyProfile($profile);
+			$this->copyProfileToDatabase($profile);
 		}
 	}
 
@@ -78,7 +78,7 @@ class UpdateProfileEventListener {
 	 * @param ProfileGetInterface $profile
 	 * @return bool
 	 */
-	protected function copyProfile(ProfileGetInterface $profile) {
+	protected function copyProfileToDatabase(ProfileGetInterface $profile) {
 		$databaseProfile = $this->socialProfileRepository->create();
 		$databaseProfile->copy($profile);
 		$databaseProfile->setProvider("UserProfile");
