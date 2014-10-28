@@ -79,13 +79,16 @@ class HybridAuthProvider implements ProviderInterface {
 	 */
 	public function getProfile() {
 		$profile = null;
-		
-		$db_profile = $this->profileRepository->findByUserAndProvider($this->user, $this->providerName);
-		
+
+
+		$db_profile = $this->makeDBProfile();
 		if($this->adapter->isUserConnected()) {
 			$profile = new HybridAuthProfile($this, $this->adapter->getUserProfile());
-			$db_profile->copy($profile);
-			$this->profileRepository->save($db_profile);
+			
+			if($db_profile !== null) {
+				$db_profile->copy($profile);
+				$this->profileRepository->save($db_profile);
+			}
 		} else {
 			$profile = $db_profile;
 		}
@@ -127,4 +130,15 @@ class HybridAuthProvider implements ProviderInterface {
 	protected function makeLink($route, $innerHtml) {
 		return '<a href="'.route($route, $this->providerName).'">'.$innerHtml.'</a>';
 	}
+	
+	protected function makeDBProfile() {
+		$db_profile = null;
+		
+		if($this->user !== null) {
+			$db_profile = $this->profileRepository->findByUserAndProvider($this->user, $this->providerName);
+		}
+		
+		return $db_profile;
+	}
+	
 } 
