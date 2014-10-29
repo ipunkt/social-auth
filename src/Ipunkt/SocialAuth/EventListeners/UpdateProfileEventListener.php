@@ -55,7 +55,7 @@ class UpdateProfileEventListener {
 	 * 
 	 * @param $parameters
 	 */
-	public function attach($user, $profile) {
+	public function attach($user, $providerName, $profile) {
 		$database_profile = $this->socialProfileRepository->findByUserAndProvider($user, 'UserProfile');
 		if($database_profile === null) {
 			$this->copyProfileToDatabase($user, $profile);
