@@ -104,10 +104,10 @@ class SocialRegisterController extends \BaseController {
 
             if($this->login_repository->save($login)) {
 	            $providers = SocialAuth::getConnectedProviders();
-	            $profile = $providers[$provider_name]->getProfile();
-	            Event::fire('social-auth.attach', ['user' => Auth::user(),  'provider' => $provider_name, 'profile' => $profile]);
+	            $socialProfile = $providers[$provider_name]->getProfile();
+	            Event::fire('social-auth.attach', ['user' => Auth::user(),  'provider' => $provider_name, 'profile' => $socialProfile]);
                 $response = Redirect::back()->with(['message' => trans('social-auth::user.account attach success',
-                    ['provider' => $provider_name, 'accountname' => $profile->displayName])]);
+                    ['provider' => $provider_name, 'accountname' => $socialProfile->getDisplayName()])]);
             } else {
                 $response = Redirect::back()->withErrors(['message' => trans('social-auth::user.account attach fail', ['accoutnname' => $profile->displayName])]);
             }
