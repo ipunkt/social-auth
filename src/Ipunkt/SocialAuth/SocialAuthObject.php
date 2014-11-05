@@ -97,6 +97,10 @@ class SocialAuthObject implements SocialAuthInterface {
 
 		return $providers;
 	}
+	
+	public function getProfile() {
+		return $this->profileRepository->findByUserAndProvider(Auth::user(), 'UserProfile');
+	}
 
 	/**
 	 * @param $hybridAuthProviders
