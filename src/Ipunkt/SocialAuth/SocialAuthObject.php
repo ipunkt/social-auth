@@ -99,7 +99,13 @@ class SocialAuthObject implements SocialAuthInterface {
 	}
 	
 	public function getProfile() {
-		return $this->profileRepository->findByUserAndProvider(Auth::user(), 'UserProfile');
+		$profile = null;
+		$user = \Auth::user();
+		
+		if($user !== false)
+			$profile = $this->profileRepository->findByUserAndProvider(Auth::user(), 'UserProfile');
+		
+		return $profile;
 	}
 
 	/**
