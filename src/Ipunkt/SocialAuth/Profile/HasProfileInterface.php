@@ -14,5 +14,5 @@ interface HasProfileInterface {
 	 * 
 	 * @return ProfileInterface
 	 */
-	function getProfile();
+	function getProfile($providerName = 'UserProvider');
 } 

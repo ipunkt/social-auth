@@ -17,14 +17,14 @@ trait EloquentHasProfile {
 	/**
 	 * @return HasOneRelationship
 	 */
-	public function socialProfile() {
-		return $this->hasOne('Ipunkt\SocialAuth\SocialProfile')->where('provider', '=', 'UserProfile');
+	public function socialProfile($providerName) {
+		return $this->hasOne('Ipunkt\SocialAuth\SocialProfile')->where('provider', '=', $providerName);
 	}
 
 	/**
 	 * @return ProfileInterface
 	 */
-	public function getProfile() {
-		return $this->socialProfile()->first();
+	public function getProfile($providerName = 'UserProvider') {
+		return $this->socialProfile($providerName)->first();
 	}
 } 
