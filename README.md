@@ -54,15 +54,17 @@ This package tries not to bring any views of its own, thus error handling is don
 On success, 'message' will be set directly in the Session. e.g. `{{ Session::get('message') }}`
 On error, 'message' will be set in errors. e.g. {{ $errors->first('message') }}
 
-### Simple Use
+### Authenticating with SocialAuth
 
-The most simple use is to allow existing users to connect their provider accounts to their logged in account and allow
-them to login through it.  
-To do this, provide a link for the user to the `social.attach` route, with the provider name as its parameter. e.g.
-`{{ link_to_route('social.attach', 'connect your Facebook account', ['Facebook']) }}`
+#### Login
 
-Then to login through the provider provide them a link to the `social.login` route with the provider as parameter. e.g.
-`{{ link_to_route('social.login', 'login through Facebook', ['Facebook']) }}`
+Letting your users log in through a SocialAuth provider is as simple as directing them to the `social.login` route with
+the name of the provider as parameter.
+```blade
+{{ link_to_route('social.login', 'log in through Facebook',  'Facebook' }}
+```
+
+#### Attaching a Provider 
 
 #### Registering
 
@@ -89,25 +91,21 @@ Example:
 
 ```blade
 @foreach(SocialAuth::getProviders() as $provider)
-    // A link which lets you login through this provider
-    {{ $provider->loginLink($provider->getName()) }}
+    if(Auth::check()) {
+        // A link which lets you attach a user from this provider to your local account
+        {{ $provider->attachLink($provider->getName()) }}
+    } else {
+        // A link which lets you login through this provider
+        {{ $provider->loginLink($provider->getName()) }}
     
-    // A link which lets you attach a user from this provider to your local account
-    {{ $provider->attachLink($provider->getName()) }}
-    
-    // A link which lets a user request a running registration to use an account on this provider to login
-    {{ $provider->registerLink($provider->getName()) }}
+        // A link which lets a user request a running registration to use an account on this provider to login
+        {{ $provider->registerLink($provider->getName()) }}
+    }
 @endforeach
 ```
 
 #### Profile
-Access to the user profile is done through the providers.  
-The ProviderInterface provides `getProfile()` which returns a `ProfileInterface`.
-
-```php
-$providers = SocialAuth::getProviders();
-echo $providers['Facebook']->getProfile()->getPhotoUrl()
-```
+The Profile is currently dependant on Hybrid_Auth_Profile as the underlying package
 
 ProfileInterface  
 
@@ -136,9 +134,18 @@ getRegion	        | Region
 getCity	            | City
 getZip	            | ZIP or Postal code
 
-TODO
-- store the profile in the Database to make it accessible even if the user is not logged in through this provider.
-- make an unspecific Profile which uses data from all available providers
+There are 3 Ways to access Profiles:
+
+- Through the providers  
+    `SocialAuth::getProviders()['Facebook']->getProfile()`  
+    This will give you the currently logged in Users Profile on the given Provider. If the User is not currently logged
+    in through this Provider then the values stored in the Database will be returned.
+- Through `SocialAuth::getProfile`
+    This will give you the Profile of the currently logged in User with the special 'UserProfile' Provider. It contains the
+    same data as the first Provider Profile to be registered or attached to this user.
+- Through the UserModel implementing HasProfileInterface
+    implementing HasProfileInterface will allow you to manage profiles not just for the active user but all users in your database.
+    A default implementation using Eloquent is available through the `EloquentHasProfile` trait
 
 ### Return Url
 Your provider will ask you to set a return url where user logging into your application get sent.
