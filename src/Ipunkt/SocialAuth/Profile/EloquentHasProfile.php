@@ -24,7 +24,7 @@ trait EloquentHasProfile {
 	/**
 	 * @return ProfileInterface
 	 */
-	public function getProfile($providerName = 'UserProvider') {
+	public function getProfile($providerName = 'UserProfile') {
 		return $this->socialProfile($providerName)->first();
 	}
 } 
