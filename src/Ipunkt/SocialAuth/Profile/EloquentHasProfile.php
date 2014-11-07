@@ -18,7 +18,7 @@ trait EloquentHasProfile {
 	 * @return HasOneRelationship
 	 */
 	public function socialProfile() {
-		return $this->hasOne('SocialProfile')->where('provider', '=', 'UserProfile');
+		return $this->hasOne('Ipunkt\SocialAuth\SocialProfile')->where('provider', '=', 'UserProfile');
 	}
 
 	/**
