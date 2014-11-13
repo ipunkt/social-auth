@@ -30,12 +30,12 @@ return [
 	 */
     'providers' => [
 	    'Facebook' => [
-		    'enabled' => true,
-		    'keys' => ['id' => 'Facebookid', 'secret' => 'supersecretkey'],
+		    'enabled' => false,
+		    'keys' => ['id' => '', 'secret' => ''],
 	    ],
 	    'Twitter' => [
 		    'enabled' => false,
-		    'keys' => ['key' => 'Twitterid', 'secret' => 'evenmoresecretkey'],
+		    'keys' => ['key' => '', 'secret' => ''],
 	    ],
 	    'Github' => [
 		    'enabled' => false,
