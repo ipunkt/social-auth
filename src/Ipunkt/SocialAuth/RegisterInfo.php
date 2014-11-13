@@ -39,8 +39,16 @@ class RegisterInfo implements RegisterInfoInterface {
     }
 	
 	public function getInfo($info) {
+		$value = null;
+		
 		$profile = $this->getProfile();
-		return $profile->$info;
+		
+		if($info == 'provider')
+			$value = $this->provider;
+		else
+			$value = $profile->$info;
+			
+		return $value;
 	}
 
 	/**
