@@ -45,7 +45,7 @@ class SocialLoginController extends \BaseController {
                 $response = Redirect::route('social.register', ['provider' => $provider_name]);
             }
         } catch(Exception $e) {
-            dd($e->getMessage());
+            dd($e);
         }
 
         return $response;
