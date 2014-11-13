@@ -37,7 +37,7 @@ return [
 		    'enabled' => false,
 		    'keys' => ['key' => '', 'secret' => ''],
 	    ],
-	    'Github' => [
+	    'GitHub' => [
 		    'enabled' => false,
 		    'keys' => ['id' => '', 'secret' => ''],
 	    ],

@@ -78,7 +78,6 @@ class SocialAuthServiceProvider extends ServiceProvider {
 				
 				foreach($providers as $providerName => &$value) {
 					$path = base_path()."/vendor/hybridauth/hybridauth/additional-providers/hybridauth-";
-					
 					$path .= strtolower($providerName);
 					
 					if(is_dir($path))
@@ -86,6 +85,7 @@ class SocialAuthServiceProvider extends ServiceProvider {
 										 "wrapper" => array('class' => 'Hybrid_Providers_'.$providerName,
 			 				'path' => $path.'/Providers/'.$providerName.'.php')
 						]);
+					
 				}
 					
 				$config = [
