@@ -40,10 +40,6 @@ return [
 	    'Github' => [
 		    'enabled' => false,
 		    'keys' => ['id' => '', 'secret' => ''],
-			 // This wrapper is necessary to use the github provider without
-			 // copying files from the additional-providers directory
-			 "wrapper" => array('class' => 'Hybrid_Providers_Github',
-			 				'path' => $_SERVER['DOCUMENT_ROOT'].'/../vendor/hybridauth/hybridauth/additional-providers/hybridauth-github/Providers/Github.php')
 	    ],
 	    'Google' => [
 		    "enabled" => false,

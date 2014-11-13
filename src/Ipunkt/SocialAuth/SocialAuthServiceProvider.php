@@ -74,9 +74,23 @@ class SocialAuthServiceProvider extends ServiceProvider {
 	 */
 	protected function setHybridauth() {
 		$this->app->bind('Hybrid_Auth', function () {
+				$providers = \Config::get('social-auth::providers');
+				
+				foreach($providers as $providerName => &$value) {
+					$path = base_path()."/vendor/hybridauth/hybridauth/additional-providers/hybridauth-";
+					
+					$path .= strtolower($providerName);
+					
+					if(is_dir($path))
+						$value = array_merge($value, [
+										 "wrapper" => array('class' => 'Hybrid_Providers_'.$providerName,
+			 				'path' => $path.'/Providers/'.$providerName.'.php')
+						]);
+				}
+					
 				$config = [
 					'base_url' => route('social.auth'),
-					'providers' => \Config::get('social-auth::providers')
+					'providers' => $providers
                 ];
                 return new Hybrid_Auth($config);
             }
