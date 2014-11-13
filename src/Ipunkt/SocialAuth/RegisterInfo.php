@@ -44,7 +44,9 @@ class RegisterInfo implements RegisterInfoInterface {
 		$profile = $this->getProfile();
 		$method = camel_case('get_'.$info);
 		
-		if(method_exists($profile,$method))
+		if($info === 'provider')
+			$value = $this->provider;
+		else if(method_exists($profile, $method))
 			$value = $profile->$method();
 			
 		return $value;
