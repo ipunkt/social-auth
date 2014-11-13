@@ -45,7 +45,7 @@ class RegisterInfo implements RegisterInfoInterface {
 		
 		if($info == 'provider')
 			$value = $this->provider;
-		else
+		else if(isset($profile->$info))
 			$value = $profile->$info;
 			
 		return $value;
