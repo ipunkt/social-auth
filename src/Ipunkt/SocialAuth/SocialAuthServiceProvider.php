@@ -25,6 +25,7 @@ class SocialAuthServiceProvider extends ServiceProvider {
 	 */
     public function boot() {
         $this->package('ipunkt/social-auth', 'social-auth');
+	    $this->setRoutes();
     }
 
 	/**
@@ -34,7 +35,6 @@ class SocialAuthServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->setRoutes();
 		$this->setHybridauth();
 		$this->setBinds();
 
