@@ -21,16 +21,16 @@ class SocialAuthServiceProvider extends ServiceProvider {
 	protected $defer = false;
 
 	/**
-	 * 
+	 * botting the package
 	 */
-    public function boot() {
-        $this->package('ipunkt/social-auth', 'social-auth');
-	    $this->setRoutes();
-    }
+	public function boot() {
+		$this->package('ipunkt/social-auth', 'social-auth');
+		$this->setRoutes();
+	}
 
 	/**
 	 * Register the service provider.
-
+	 *
 	 * @return void
 	 */
 	public function register()
@@ -38,7 +38,7 @@ class SocialAuthServiceProvider extends ServiceProvider {
 		$this->setHybridauth();
 		$this->setBinds();
 
-        Event::listen('auth.logout', 'Ipunkt\SocialAuth\SocialLoginController@logout');
+		Event::listen('auth.logout', 'Ipunkt\SocialAuth\SocialLoginController@logout');
 		Event::listen('social-auth.register', 'Ipunkt\SocialAuth\EventListeners\UpdateProfileEventListener@register');
 		Event::listen('social-auth.attach', 'Ipunkt\SocialAuth\EventListeners\UpdateProfileEventListener@attach');
 	}
@@ -79,22 +79,22 @@ class SocialAuthServiceProvider extends ServiceProvider {
 				foreach($providers as $providerName => &$value) {
 					$path = base_path()."/vendor/hybridauth/hybridauth/additional-providers/hybridauth-";
 					$path .= strtolower($providerName);
-					
+
 					if(is_dir($path))
 						$value = array_merge($value, [
-										 "wrapper" => array('class' => 'Hybrid_Providers_'.$providerName,
+							'wrapper' => array('class' => 'Hybrid_Providers_'.$providerName,
 			 				'path' => $path.'/Providers/'.$providerName.'.php')
 						]);
-					
 				}
 					
 				$config = [
 					'base_url' => route('social.auth'),
-					'providers' => $providers
-                ];
-                return new Hybrid_Auth($config);
-            }
+					'providers' => $providers,
+					'debug_mode' => \Config::get('app.debug'),
+					'debug_file' => storage_path().'/logs/laravel.log',
+				];
+				return new Hybrid_Auth($config);
+			}
 		);
 	}
-
 }
